@@ -27,29 +27,35 @@ const serializeSKOS = (data) => {
     store.add(baseURI, SKOS("hasTopConcept"), base(c))
   })
 
-  data.concepts.forEach(c => {
+  for (let c of data.concepts) {
     store.add(base(c.subject), RDF("type"), SKOS("Concept"))
     if (!c.broader.length) {
       store.add(base(c.subject), SKOS("topConceptOf"), baseURI)
     } else {
       store.add(base(c.subject), SKOS("inScheme"), baseURI)
     }
-    if (c.narrower.length) {
-      c.narrower.forEach(n => {
-        store.add(base(c.subject), SKOS("narrower"), base(getSubjectFromIdentifier(data.concepts, n)))
-      })
-    }
-    if (c.broader.length) {
-      c.broader.forEach(b => {
-        store.add(base(c.subject), SKOS("broader"), base(getSubjectFromIdentifier(data.concepts, b)))
-      })
-    }
-    c.properties.forEach(p => {
-      if (p.predicate.valueType === "Literal") {
-        store.add(base(c.subject), $rdf.sym(p.predicate.uri), $rdf.literal(p.object.objectValue, p.object.objectType))
+    try {
+
+      if (c.narrower.length) {
+        c.narrower.forEach(n => {
+          store.add(base(c.subject), SKOS("narrower"), base(getSubjectFromIdentifier(data.concepts, n)))
+        })
       }
-    })
-  })
+      if (c.broader.length) {
+        c.broader.forEach(b => {
+          store.add(base(c.subject), SKOS("broader"), base(getSubjectFromIdentifier(data.concepts, b)))
+        })
+      }
+      c.properties.forEach(p => {
+        if (p.predicate.valueType === "Literal") {
+          store.add(base(c.subject), $rdf.sym(p.predicate.uri), $rdf.literal(p.object.objectValue, p.object.objectType))
+        }
+      })
+    }
+    catch (e) {
+      continue
+    }
+  }
 
 
   return $rdf.serialize(null, store, "https://test.com/".uri, 'text/turtle');

@@ -1,5 +1,5 @@
 <script>
-	import { concepts, serializedTurtle } from './conceptStore';
+	import { concepts, selectedConcept, serializedTurtle } from './conceptStore';
 	import { serializeSKOS } from './serialize.js';
 	import { writable } from 'svelte/store';
 	import { eye, eyeSlash } from 'svelte-awesome/icons';
@@ -67,7 +67,13 @@
 		<button class="btn my-4" on:click={createTurtle} on:click={() => ($showTurtle = true)}
 			>Create Turtle 🐢</button
 		>
-		<button class="btn my-4" on:click={() => concepts.set([])}>Delete all Concepts 🗑️</button>
+		<button
+			class="btn my-4"
+			on:click={() => selectedConcept.set({})}
+			on:click={() => showTurtle.set(false)}
+			on:click={() => concepts.set([])}
+			on:click={() => ($serializedTurtle = '')}>Delete all Concepts 🗑️</button
+		>
 		<button on:click={() => ($showTurtle = !$showTurtle)} class="btn my-4 ml-auto"
 			>{#if !$showTurtle}
 				<Icon class="mr-2" data={eye} />Show Turtle

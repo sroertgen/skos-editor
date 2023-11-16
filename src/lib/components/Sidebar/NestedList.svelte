@@ -48,7 +48,7 @@
 		<button
 			class:bg-orange-400={current === $selectedConcept.identifier}
 			class:hover:bg-orange-400={current === $selectedConcept.identifier}
-			class="px-1 rounded-full hover:bg-orange-200"
+			class="px-1 rounded hover:bg-orange-200"
 			id={concept.identifier}
 			href={concept.identifier}
 			on:click|preventDefault={scrollIntoView}>{label}</button

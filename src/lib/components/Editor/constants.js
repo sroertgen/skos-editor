@@ -22,6 +22,12 @@ const skos = [
     dataType: "Language",
   },
   { id: 3, predicate: "skos:related", valueType: "Uri" },
+  {
+    id: 4,
+    predicate: "skos:definition",
+    valueType: "Literal",
+    dataType: "Language",
+  },
 ];
 
 export const skosPredicates = skos.map((e) => {
