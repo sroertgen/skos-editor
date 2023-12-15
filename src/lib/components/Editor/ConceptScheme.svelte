@@ -7,7 +7,7 @@
 
 	let conceptSchemeApi = 'http://127.0.0.1:8000/concept-schemes/';
 	let conceptSchemeTitle = 'Test';
-	let conceptSchemeBase = 'https://google.com/';
+	let conceptSchemeBase = 'https://w3id.org/';
 	let conceptSchemeIdentifier;
 	let showTurtle = writable(false);
 
