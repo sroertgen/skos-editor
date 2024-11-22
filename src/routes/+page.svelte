@@ -10,8 +10,8 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>SKOS-Editor</title>
+	<meta name="description" content="Basic SKOS-Editor" />
 </svelte:head>
 
 <main>

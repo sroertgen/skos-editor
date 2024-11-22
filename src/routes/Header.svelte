@@ -17,7 +17,7 @@
 		</svg>
 		<ul>
 			<li class:active={$page.url.pathname === '/'}>
-				<a href="/">Home</a>
+				<a href="/">SKOS-Editor</a>
 			</li>
 			<li class:active={$page.url.pathname === '/about'}>
 				<a href="/about">About</a>
