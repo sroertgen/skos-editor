@@ -15,7 +15,6 @@
 </svelte:head>
 
 <main>
-	<h1>SKOS-Editor</h1>
 	{#if mode == 'none'}
 		<button on:click={() => (mode = 'editor')}>Create New Vocab</button>
 		<button on:click={() => (mode = 'import')}>Import Vocab</button>
