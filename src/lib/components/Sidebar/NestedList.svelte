@@ -33,30 +33,26 @@
 </script>
 
 <ul>
-	<li>
-		{#if children.length > 0}
-			{#if expanded}
-				<button class="ml-1 btn btn-xs btn-circle" on:click={toggle}
-					><Icon data={chevronDown} /></button
-				>
-			{:else}
-				<button class="ml-1 btn btn-xs btn-circle" on:click={toggle}
-					><Icon data={chevronRight} /></button
-				>
-			{/if}
-		{/if}
-		<button
-			class:bg-orange-400={current === $selectedConcept.identifier}
-			class:hover:bg-orange-400={current === $selectedConcept.identifier}
-			class="px-1 rounded hover:bg-orange-200"
-			id={concept.identifier}
-			href={concept.identifier}
-			on:click|preventDefault={scrollIntoView}>{label}</button
-		>
-	</li>
+	<div class="flex flex-row items-center gap-1">
+		<li>
+			<button
+				class="ml-1 btn btn-xs btn-circle"
+				class:invisible={!children.length}
+				on:click={toggle}><Icon data={expanded ? chevronDown : chevronRight} /></button
+			>
+			<button
+				class:bg-orange-400={current === $selectedConcept.identifier}
+				class:hover:bg-orange-400={current === $selectedConcept.identifier}
+				class="px-1 rounded hover:bg-orange-200"
+				id={concept.identifier}
+				href={concept.identifier}
+				on:click|preventDefault={scrollIntoView}>{label}</button
+			>
+		</li>
+	</div>
 
 	{#if expanded && children.length}
-		<ul class="pt-1 px-3 ml-4 list-none border-l-2 border-r-0 border-slate-400">
+		<ul class="ml-4 list-none border-l-2 border-r-0 border-slate-400">
 			{#each children as child}
 				<li>
 					{#if child.narrower && child.narrower}
