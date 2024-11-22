@@ -66,9 +66,6 @@ function createConcept(conceptIdentifier = nanoid(5), broader = []) {
 function addConcept(parentIdentifier = null) {
   if (parentIdentifier !== null) {
     // add new concept with its parent
-    console.log(
-      `add narrower concept with parent identifier: ${parentIdentifier}`
-    );
     const conceptIdentifier = nanoid(5);
     const narrowerConcept = createConcept(conceptIdentifier, [
       parentIdentifier,
@@ -84,7 +81,6 @@ function addConcept(parentIdentifier = null) {
     });
   } else {
     concepts.update(($concepts) => {
-      console.log(`add top concept`);
       $concepts = $concepts.concat(createConcept());
       return $concepts;
     });
@@ -92,9 +88,6 @@ function addConcept(parentIdentifier = null) {
 }
 
 function updateIdentifier(conceptIdentifier, newIdentifier) {
-  console.log(conceptIdentifier);
-  console.log(newIdentifier)
-  console.info("update identifier");
   concepts.update(($concepts) => {
     $concepts = $concepts.map((c) => {
       if (c.subject === conceptIdentifier) {
@@ -117,7 +110,6 @@ function updateIdentifier(conceptIdentifier, newIdentifier) {
         return c;
       }
     });
-    console.log($concepts)
     return $concepts;
   });
 }
@@ -128,7 +120,6 @@ function updateObject(
   predicate,
   object
 ) {
-  console.log("updateObject");
   object.objectValue &&
     object.objectType !== "none" &&
     concepts.update(($concepts) => {
@@ -141,7 +132,6 @@ function updateObject(
                 predicate: predicate,
                 object: object,
               };
-              console.log(prop);
               return prop;
             } else {
               return p;
@@ -178,7 +168,6 @@ function updateProperties(identifier, predicates) {
 }
 
 function updateSubject(identifier, newSubject) {
-  console.info("update subject")
   let success = false;
   concepts.update($concepts => {
     if ($concepts.filter(c => c.subject === newSubject).length >= 1) {
@@ -186,7 +175,6 @@ function updateSubject(identifier, newSubject) {
       $concepts = $concepts
       return $concepts
     } else {
-      console.log("everything alright changing subject")
       $concepts = $concepts.map(c => c.identifier === identifier ? { ...c, subject: newSubject } : c)
       success = true;
       return $concepts
@@ -221,13 +209,10 @@ function deleteConcept(identifier) {
 
 export const conceptTree = derived(concepts, ($concepts) => {
   const data = createDataTree($concepts);
-  console.log("data is");
-  console.log(data);
   return data;
 });
 
 const createDataTree = (dataset) => {
-  console.log(dataset);
   const hashTable = Object.create(null);
   dataset.forEach(
     (aData) => (hashTable[aData.identifier] = { ...aData, children: [] })

@@ -24,7 +24,6 @@
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log('Success:', data);
 				conceptSchemeTurtle = data;
 			})
 			.catch((error) => {
