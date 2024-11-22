@@ -199,7 +199,6 @@ function deleteConcept(identifier) {
   // TODO implement a modal to ask for confirmation
   concepts.update($concepts => {
     const positionOfConcept = $concepts.findIndex(c => c.identifier === identifier)
-    console.log($concepts)
     selectedConcept.set($concepts[positionOfConcept - 1])
     $concepts = $concepts.map(c => {
     if (c.narrower.includes(identifier)) {

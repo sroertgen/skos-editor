@@ -59,8 +59,13 @@
 		<label class="label" for="conceptSchemeBase">
 			<span>Base of Concept Scheme:</span>
 		</label>
-		<input class="input input-bordered input-sm" type="text" bind:value={conceptSchemeBase} />
-
+		<input 
+      class="input input-bordered input-sm" 
+      type="text" 
+      bind:value={conceptSchemeBase} 
+      on:blur={() => {if (!conceptSchemeBase.endsWith("/"))
+        {conceptSchemeBase = conceptSchemeBase + "/"}
+      }} />
 		<label class="label" for="conceptSchemeIdentifier">
 			<span>Preferred Namespace URI for Concept Scheme (optional):</span>
 		</label>
