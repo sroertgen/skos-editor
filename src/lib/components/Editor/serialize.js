@@ -65,7 +65,7 @@ const serializeSKOS = (data) => {
   }
 
 
-  return $rdf.serialize(null, store, "https://test.com/".uri, 'text/turtle');
+  return $rdf.serialize(null, store, null, 'text/turtle');
 };
 
 export { serializeSKOS };
