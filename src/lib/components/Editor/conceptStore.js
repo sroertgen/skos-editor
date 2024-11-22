@@ -196,13 +196,26 @@ function updateSubject(identifier, newSubject) {
 }
 
 function deleteConcept(identifier) {
-  console.info("delete concept")
-  // TODO also delete all narrower concepts
   // TODO implement a modal to ask for confirmation
   concepts.update($concepts => {
     const positionOfConcept = $concepts.findIndex(c => c.identifier === identifier)
+    console.log($concepts)
     selectedConcept.set($concepts[positionOfConcept - 1])
-    $concepts = $concepts.filter(c => c.identifier !== identifier)
+    $concepts = $concepts.map(c => {
+    if (c.narrower.includes(identifier)) {
+      return {
+        ...c,
+        narrower: c.narrower.filter(n => n !== identifier),
+      };
+    }
+    if (c.broader.includes(identifier)) {
+      return {
+        ...c,
+        broader: c.broader.filter(n => n !== identifier),
+      };
+    }
+    return c;
+  }).filter(c => c?.identifier !== identifier)
     return $concepts
   })
 }
