@@ -1,4 +1,3 @@
-// const $rdf = require("rdflib");
 import * as $rdf from 'rdflib';
 
 const getSubjectFromIdentifier = (concepts, identifier) => {
@@ -15,7 +14,6 @@ const DCTERMS = $rdf.Namespace(dctermsURI);
 const VANN = $rdf.Namespace(vannURI);
 
 const serializeSKOS = (data) => {
-  console.log(data)
   const baseURI = $rdf.sym(data.base);
   const base = $rdf.Namespace(data.base)
 
@@ -27,7 +25,8 @@ const serializeSKOS = (data) => {
   } 
 
   store.add(baseURI, RDF("type"), SKOS("ConceptScheme"))
-  store.add(baseURI, DCTERMS("title"), $rdf.literal(data.title, "de"))
+  store.add(baseURI, DCTERMS("title"), $rdf.literal(data.title, "en"))
+  store.add(baseURI, DCTERMS("description"), $rdf.literal(data.description, "en"))
 
   const topConcepts = data.concepts.filter(c => !c.broader.length).map(c => c.subject)
   topConcepts.forEach(c => {

@@ -9,6 +9,7 @@
 	let conceptSchemeTitle = 'Test';
 	let conceptSchemeBase = 'https://w3id.org/';
 	let conceptSchemeIdentifier;
+  let conceptSchemeDescription = "My wonderful vocabulary."
 	let showTurtle = writable(false);
 
 	async function getTurtle() {
@@ -38,6 +39,7 @@
 		title: conceptSchemeTitle,
 		base: conceptSchemeBase,
 		identifier: conceptSchemeIdentifier,
+    description: conceptSchemeDescription,
 		concepts: $concepts
 	};
 </script>
@@ -48,6 +50,11 @@
 			<span>Title of Concept Scheme:</span>
 		</label>
 		<input class=" input input-bordered input-sm" type="text" bind:value={conceptSchemeTitle} />
+
+		<label class="label" for="conceptSchemeDescription">
+			<span>Description of Concept Scheme:</span>
+		</label>
+		<input class=" input input-bordered input-sm" type="text" bind:value={conceptSchemeDescription} />
 
 		<label class="label" for="conceptSchemeBase">
 			<span>Base of Concept Scheme:</span>
