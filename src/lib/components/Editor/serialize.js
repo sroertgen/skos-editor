@@ -14,6 +14,11 @@ const DCTERMS = $rdf.Namespace(dctermsURI);
 const VANN = $rdf.Namespace(vannURI);
 
 const serializeSKOS = (data) => {
+  const conceptMissingPrefLabels = data.concepts.filter(c => !c.properties.some(p => p.predicate.uri === skosURI + "prefLabel"))
+  if (conceptMissingPrefLabels.length) {
+    alert("Missed some prefLabels for concepts: " + conceptMissingPrefLabels.map(c => c.subject).join(", "));
+    return "Fix prefLabels for: " + conceptMissingPrefLabels.map(c => c.subject).join(", ")
+  }
   const baseURI = $rdf.sym(data.base);
   const base = $rdf.Namespace(data.base)
 
