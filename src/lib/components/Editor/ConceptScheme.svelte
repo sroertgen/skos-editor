@@ -55,7 +55,7 @@
 		<input class="input input-bordered input-sm" type="text" bind:value={conceptSchemeBase} />
 
 		<label class="label" for="conceptSchemeIdentifier">
-			<span>Identifier of Concept Scheme (optional):</span>
+			<span>Preferred Namespace URI for Concept Scheme (optional):</span>
 		</label>
 		<input class="input input-bordered input-sm" type="text" bind:value={conceptSchemeIdentifier} />
 	</div>
