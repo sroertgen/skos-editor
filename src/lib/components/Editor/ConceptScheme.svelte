@@ -33,17 +33,13 @@
 	function createTurtle() {
 		const data = serializeSKOS(conceptScheme);
 		$serializedTurtle = data;
-		console.log(serializedTurtle);
 	}
-	$: console.log($concepts);
 	$: conceptScheme = {
 		title: conceptSchemeTitle,
 		base: conceptSchemeBase,
 		identifier: conceptSchemeIdentifier,
 		concepts: $concepts
 	};
-	$: stringifiedConceptScheme = JSON.stringify(conceptScheme, null, 2);
-	$: console.log(conceptScheme);
 </script>
 
 <div class="border border-slate-800 rounded-md text-left p-4 m-4 overflow-auto max-h-screen">
@@ -87,5 +83,4 @@
 	{#if $showTurtle}
 		<textarea value={$serializedTurtle} cols="79" rows="10" />
 	{/if}
-	<!-- <textarea value={stringifiedConceptScheme} cols="79" rows="10" /> -->
 </div>

@@ -7,17 +7,24 @@ const getSubjectFromIdentifier = (concepts, identifier) => {
 
 const dctermsURI = 'http://purl.org/dc/terms/'
 const skosURI = 'http://www.w3.org/2004/02/skos/core#'
+const vannURI = 'http://purl.org/vocab/vann/'
 
 const RDF = $rdf.Namespace('http://www.w3.org/1999/02/22-rdf-syntax-ns#');
 const SKOS = $rdf.Namespace(skosURI);
 const DCTERMS = $rdf.Namespace(dctermsURI);
+const VANN = $rdf.Namespace(vannURI);
 
 const serializeSKOS = (data) => {
+  console.log(data)
   const baseURI = $rdf.sym(data.base);
   const base = $rdf.Namespace(data.base)
 
   const store = $rdf.graph();
   store.setPrefixForURI('skos', 'http://www.w3.org/2004/02/skos/core#')
+  if (data?.identifier) {
+    store.setPrefixForURI(data.identifier, data.base)
+    store.add(baseURI, VANN("preferredNamespaceUri"), baseURI  )
+  } 
 
   store.add(baseURI, RDF("type"), SKOS("ConceptScheme"))
   store.add(baseURI, DCTERMS("title"), $rdf.literal(data.title, "de"))
