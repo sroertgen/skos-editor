@@ -66,7 +66,7 @@
         {conceptSchemeBase = conceptSchemeBase + "/"}
       }} />
 		<label class="label" for="conceptSchemeIdentifier">
-			<span>Preferred Namespace URI for Concept Scheme (optional):</span>
+			<span>Preferred namespace prefix for concept scheme (e.g. <code>lrt</code>)</span>
 		</label>
 		<input class="input input-bordered input-sm" type="text" bind:value={conceptSchemeIdentifier} />
 	</div>

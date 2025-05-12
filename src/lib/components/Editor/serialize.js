@@ -26,7 +26,8 @@ const serializeSKOS = (data) => {
   store.setPrefixForURI('skos', 'http://www.w3.org/2004/02/skos/core#')
   if (data?.identifier) {
     store.setPrefixForURI(data.identifier, data.base)
-    store.add(baseURI, VANN("preferredNamespaceUri"), baseURI  )
+		store.add(baseURI, VANN('preferredNamespaceUri'), $rdf.literal(data.base));
+		store.add(baseURI, VANN('preferredNamespacePrefix'), $rdf.literal(data.identifier));
   } 
 
   store.add(baseURI, RDF("type"), SKOS("ConceptScheme"))
